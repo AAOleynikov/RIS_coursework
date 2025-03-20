@@ -1,0 +1,32 @@
+{
+  "director": {
+    "host": "127.0.0.1",
+    "user": "director",
+    "password": "Director123",
+    "database": "db_zakroma"
+  },
+  "admin": {
+    "host": "127.0.0.1",
+    "user": "admin",
+    "password": "Admin123",
+    "database": "db_zakroma"
+  },
+  "supplier": {
+    "host": "127.0.0.1",
+    "user": "supplier",
+    "password": "Supplier123",
+    "database": "db_zakroma"
+  },
+  "manager": {
+    "host": "127.0.0.1",
+    "user": "manager",
+    "password": "Manager123",
+    "database": "db_zakroma"
+  },
+  "not_authorized": {
+    "host": "127.0.0.111",
+    "user": "not_authorized",
+    "password": "NotAuthorized123",
+    "database": "db_zakroma"
+  }
+}

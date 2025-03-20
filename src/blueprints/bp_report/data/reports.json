@@ -1,0 +1,17 @@
+[
+  {
+    "rep_id": "1",
+    "rep_name": "Месячный отчёт по поставкам продуктов",
+    "proc_name": "generate_invoiced_products_report",
+    "proc_table": "invoiced_products_report",
+    "sql_get": "invoiced_products_report.sql",
+    "schema": [
+      "id категории продукта",
+      "категория продукта",
+      "id продукта",
+      "продукт",
+      "количество поставленных единиц",
+      "средняя цена поставки"
+    ]
+  } 
+]

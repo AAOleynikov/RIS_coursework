@@ -1,0 +1,35 @@
+{#
+navbar_brand - название, которое будет отображено в навигационной панели;
+nav_links - список ссылок, которые будут отображены в навигационной панели;
+#}
+
+{% macro render_navbar(navbar_brand, nav_links, user_id, user_group) %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('main_menu') }}"><b>{{navbar_brand}}</b></a>
+        <button aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler"
+                data-bs-target="#navbarNav" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% for link in nav_links %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ link.url }}"
+                       onmouseout="this.style.color='#FFFFFF'; this.style.backgroundColor='transparent';"
+                       onmouseover="this.style.color='#FFFFFF'; this.style.backgroundColor='#2c3e50';"
+                       style="color: #FFFFFF; transition: color 0.3s, background-color 0.3s;">
+                        <b>{{ link.name }}</b>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% if user_id and user_group %}
+            <span class="navbar-text text-white ms-3">
+                <b>ID:</b> {{ user_id }} | <b>Группа:</b> {{ user_group }}
+            </span>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% endmacro %}

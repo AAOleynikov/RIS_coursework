@@ -1,0 +1,67 @@
+{
+  "supplier": {
+    "blueprints": {
+      "bp_supply": {
+        "pages": [
+          "supply_menu",
+          "make_invoice",
+          "update_invoice",
+          "update_invoice_product",
+          "delete_invoice_product",
+          "clear_invoice",
+          "save_invoice"
+        ]
+      }
+    }
+  },
+  "director": {
+    "blueprints": {
+      "bp_query": {
+        "pages": [
+          "query_menu",
+          "universal_query_controller"
+        ],
+        "accessible_queries": [
+          "1", "2"
+        ]
+      },
+      "bp_report": {
+        "pages": [
+          "report_menu"
+        ],
+        "permissions": {
+          "can_create_reports": [],
+          "can_view_reports": [
+            "1"
+          ]
+        }
+      }
+    }
+  },
+  "admin": {
+    "blueprints": {
+      "bp_report": {
+        "pages": [
+          "report_menu"
+        ],
+        "permissions": {
+          "can_create_reports": [
+            "1"
+          ],
+          "can_view_reports": []
+        }
+      }
+    }
+  },
+  "manager": {
+    "blueprints": {
+      "bp_supply": {
+        "pages": [
+          "supply_menu",
+          "work_with_invoices",
+          "confirm_invoice"
+        ]
+      }
+    }
+  }
+}

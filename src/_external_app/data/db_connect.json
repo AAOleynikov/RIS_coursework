@@ -1,0 +1,6 @@
+{
+    "host": "127.0.0.1",
+    "user": "not_authorized",
+    "password": "NotAuthorized123",
+    "database": "db_zakroma"
+}

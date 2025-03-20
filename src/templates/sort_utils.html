@@ -1,0 +1,84 @@
+{% macro render_sortable_searchable_table(headers, results) %}
+
+<div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input class="form-control" id="searchInput" placeholder="Поиск по таблице" type="text">
+        </div>
+    </div>
+
+    <div>
+        <table class="table table-hover">
+            {{render_sortable_table_header(headers)}}
+            {{render_sortable_table_body(results)}}
+        </table>
+    </div>
+</div>
+{% endmacro %}
+
+{% macro render_sortable_table_header(headers) %}
+<style>
+    .sortable:hover {
+        cursor: pointer;
+        color: #007bff;
+    }
+</style>
+<thead class="table-dark">
+<tr>
+    {% for header in headers %}
+    <th class="sortable " onclick="sortTable({{ loop.index0 }})">{{ header }}</th>
+    {% endfor %}
+</tr>
+</thead>
+{% endmacro %}
+
+{% macro render_sortable_table_body(results) %}
+<tbody id="sortableTable">
+{% for result in results %}
+<tr>
+    {% for item in result %}
+    <td>{{ item }}</td>
+    {% endfor %}
+</tr>
+{% endfor %}
+</tbody>
+{% endmacro %}
+
+
+{% macro sort_find_script() %}
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const tableRows = document.querySelectorAll('#sortableTable tr');
+
+    // Функция для фильтрации результатов
+    searchInput.addEventListener('input', () => {
+        const filter = searchInput.value.toLowerCase();
+        tableRows.forEach(row => {
+            const textContent = row.textContent.toLowerCase();
+            row.style.display = textContent.includes(filter) ? '' : 'none';
+        });
+    });
+
+
+    // Функция для сортировки таблицы
+    function sortTable(columnIndex) {
+        const table = document.getElementById('sortableTable');
+        const rows = Array.from(table.rows);
+        const ascending = table.getAttribute('data-sort-asc') === 'true';
+
+        rows.sort((a, b) => {
+            const aText = a.cells[columnIndex].textContent.trim();
+            const bText = b.cells[columnIndex].textContent.trim();
+
+            return ascending
+                ? aText.localeCompare(bText, undefined, {numeric: true})
+                : bText.localeCompare(aText, undefined, {numeric: true});
+        });
+
+        rows.forEach(row => table.appendChild(row));
+        table.setAttribute('data-sort-asc', !ascending);
+    }
+</script>
+{% endmacro %}
+
+

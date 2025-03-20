@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% import 'navbar_utils.html' as nf_utils %}
+{% import 'sort_utils.html' as sort_utils %}
+<html class="h-100" lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Выбор оборудования на тестирование</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .sortable:hover {
+            cursor: pointer;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+
+{% if nav_links is not defined %}
+{% set nav_links = [] %}
+{% endif %}
+{% set nav_links = nav_links + [
+{"url": url_for('bp_supply.work_with_invoices'), "name": "ВЕРНУТЬСЯ К ВЫБОРУ НАКЛАДНОЙ"},
+{"url": url_for('bp_supply.supply_menu'), "name": "ВЕРНУТЬСЯ В МЕНЮ ПОСТАВОК"},
+{"url": url_for('bp_auth.logout'), "name": "ВЫЙТИ"}
+] %}
+{{ nf_utils.render_navbar("Система ЗАКРОМА"|safe, nav_links, user_id, user_group) }}
+
+{% include 'flash.html' %}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-2">Подтверждение накладной ID: {{ invoice_id }}</h1>
+
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <input class="form-control" id="searchInput" placeholder="Поиск продуктов" type="text">
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th class="sortable" onclick="sortTable(0)">ID прод.</th>
+            <th class="sortable" onclick="sortTable(1)">Назв. прод.</th>
+            <th class="sortable" onclick="sortTable(2)">ID кат. прод.</th>
+            <th class="sortable" onclick="sortTable(3)">Назв. кат. прод.</th>
+            <th class="sortable" onclick="sortTable(4)">Кол-во</th>
+            <th class="sortable" onclick="sortTable(5)">Ед. изм.</th>
+            <th class="sortable" onclick="sortTable(6)">Цена, Р</th>
+        </tr>
+        </thead>
+        <tbody id="sortableTable">
+        {% for invoice_product in invoice_products %}
+        <tr>
+            <td>{{ invoice_product[0] }}</td>
+            <td>{{ invoice_product[1] }}</td>
+            <td>{{ invoice_product[2] }}</td>
+            <td>{{ invoice_product[3] }}</td>
+            <td>{{ invoice_product[4] }}</td>
+            <td>{{ invoice_product[5] }}</td>
+            <td>{{ invoice_product[6] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <div class="mt-2">
+    <form action="{{ url_for('bp_supply.confirm_invoice')}}" method="POST">
+    <input name="invoice_id" type="hidden" value="{{ invoice_id }}">
+    <button class="btn btn-dark" type="submit">Подтвердить поставку</button>
+</form>
+</div>
+</div>
+
+
+</body>
+
+{{ sort_utils.sort_find_script() }}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</html>

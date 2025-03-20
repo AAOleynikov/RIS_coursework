@@ -1,0 +1,43 @@
+[
+  {
+    "query_id": "1",
+    "query_name": "Посмотреть все поставки за период",
+    "query_controller": "universal_query_controller",
+    "query_model": "universal_query_modeller",
+    "query_form": "SearchInvoicedProductsByDateRangeForm",
+    "sql": "get_invoiced_products_by_date_range.sql",
+    "sql_params": [
+      "start_date",
+      "end_date"
+    ],
+    "schema_ru": [
+      "id поставки",
+      "Дата поставки",
+      "id поставщика",
+      "id категории продукта",
+      "категория продукта",
+      "id продукта",
+      "продукт"
+    ]
+  },
+
+  {
+    "query_id": "2",
+    "query_name": "Посмотреть все поставки поставщика",
+    "query_controller": "universal_query_controller",
+    "query_model": "universal_query_modeller",
+    "query_form": "SearchInvoicedProductsBySupplierForm",
+    "sql": "get_invoiced_products_by_supplier_id.sql",
+    "sql_params": [
+      "sup_id"
+    ],
+    "schema_ru": [
+      "id поставки",
+      "Дата поставки",
+      "id категории продукта",
+      "категория продукта",
+      "id продукта",
+      "продукт"
+    ]
+  }
+]
